@@ -37,7 +37,7 @@ char *word_terminator(char *word){
   while ((non_space_char(*end) == 1) && (*end != '\0')){
     end++;
   }
-  return --end;
+  return end;
 }
 
 /* Counts the number of words in the string argument. */
@@ -60,7 +60,16 @@ int count_words(char *str){
 
 /* Returns a fresly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
-char *copy_str(char *inStr, short len);
+char *copy_str(char *inStr, short len){
+  char *copy;
+  copy = (char *) malloc(len);
+  for(int i = 0; i < len; i++){
+    copy[i] = inStr[i];
+  }
+  printf("Original string is at: %x\n",inStr);
+  printf("Copy of string is at:  %x\n",copy);
+  return copy;
+}
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
    space-separated tokens from zero-terminated str.
