@@ -19,4 +19,6 @@ int main()
 
   short y = 12;
   printf("%s\n",copy_str(a,y));
+
+  tokenize(a);
 }

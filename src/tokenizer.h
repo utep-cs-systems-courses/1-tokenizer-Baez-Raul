@@ -66,8 +66,6 @@ char *copy_str(char *inStr, short len){
   for(int i = 0; i < len; i++){
     copy[i] = inStr[i];
   }
-  printf("Original string is at: %x\n",inStr);
-  printf("Copy of string is at:  %x\n",copy);
   return copy;
 }
 
@@ -80,12 +78,33 @@ char *copy_str(char *inStr, short len){
      tokens[2] = "string" 
      tokens[3] = 0
 */
-char **tokenize(char* str);
+char **tokenize(char* str){
+  int size = count_words(str)+1;
+  char *tokens[size];
+  
+  char *iter = str;
+  char *word;
+  for(int i = 0; i < size; i++){
+    iter = word_start(iter);
+    word = copy_str(iter,(word_terminator(iter)-word_start(iter)));
+    tokens[i] = word;
+    iter = word_terminator(iter);
+  }
+  return tokens;
+}
 
 /* Prints all tokens. */
-void print_tokens(char **tokens);
+void print_tokens(char **tokens){
+  for(int i = 0; *tokens[i] != '\0'; i++){
+    printf("%s\n",tokens[i]);
+  }
+}
 
 /* Frees all tokens and the vector containing themx. */
-void free_tokens(char **tokens);
+void free_tokens(char **tokens){
+  for(int i = 0; *tokens[i] != '\0'; i++){
+    tokens[i] = "";
+  }
+}
 
 #endif
